@@ -26,3 +26,11 @@ arrToHaskore (b,s) =
         b_mel = foldl (\acc n -> acc :+: n) (head b_notes) (tail b_notes)
         s_mel = foldl (\acc n -> acc :+: n) (head s_notes) (tail s_notes) in
     Tempo 3 (b_mel :=: s_mel)
+
+makeMidi :: String -> ([Integer], [Integer]) -> IO ()
+makeMidi n (b,s) = do
+    let mus = arrToHaskore (b,s) 
+        midi = testMidi mus
+    outputMidiFile n midi
+
+

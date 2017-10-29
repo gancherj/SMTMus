@@ -8,6 +8,4 @@ import Mus.Play
 
 main = do
     mels <- runSMT $ genMelody 1
-    let mus = map arrToHaskore mels
-        midis = map H.testMidi mus
-    mapM (\(i,midi) -> H.outputMidiFile ("test_" ++ (show i) ++".mid") midi) (zip [0.. (length midis)-1] midis)
+    mapM (\(i, mel) -> makeMidi ("test_" ++ (show i) ++ ".mid") mel) (zip [0..(length mels)-1] mels)
